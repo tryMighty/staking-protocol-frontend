@@ -78,7 +78,7 @@ const wallets: Wallet[] = [
 function Badge({ label, variant }: { label: string; variant: 'recommended' | 'recent' | 'detected' }) {
   if (variant === 'recommended') {
     return (
-      <span className="px-3 py-1 bg-primary/10 border border-primary/25 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full">
+      <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 bg-primary/10 border border-primary/25 text-primary text-[9px] sm:text-[10px] font-bold uppercase tracking-widest rounded-full whitespace-nowrap">
         {label}
       </span>
     )
@@ -202,7 +202,7 @@ export default function ConnectWallet() {
                     verified
                   </span>
                 </div>
-                <p className="text-[11px] text-on-surface-variant leading-relaxed">
+                <p className="text-[9.5px] sm:text-[11px] text-on-surface-variant leading-relaxed">
                   By connecting a wallet, you agree to the{' '}
                   <span className="text-primary font-semibold hover:underline cursor-pointer">
                     Terms of Service
