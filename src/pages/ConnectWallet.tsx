@@ -109,10 +109,10 @@ function WalletCard({ wallet, onClick, isConnecting }: { wallet: Wallet; onClick
       {wallet.badge?.variant === 'recommended' && !isConnecting && (
         <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
-      <div className={`relative flex items-center justify-between p-4 glass-item rounded-2xl ${isConnecting ? 'animate-pulse border-primary/40' : ''}`}>
+      <div className={`relative flex items-center justify-between p-3 sm:p-4 glass-item rounded-2xl ${isConnecting ? 'animate-pulse border-primary/40' : ''}`}>
         {/* Left: icon + name */}
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center border border-primary/10">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/5 flex items-center justify-center border border-primary/10">
             {isConnecting ? (
               <span className="material-symbols-outlined animate-spin text-primary">sync</span>
             ) : wallet.icon}
@@ -129,8 +129,14 @@ function WalletCard({ wallet, onClick, isConnecting }: { wallet: Wallet; onClick
         {/* Right */}
         {!isConnecting && (
           wallet.badge ? (
-            <Badge label={wallet.badge.label} variant={wallet.badge.variant} />
-          ) : wallet.trailing
+            <div className="scale-90 sm:scale-100 origin-right">
+              <Badge label={wallet.badge.label} variant={wallet.badge.variant} />
+            </div>
+          ) : (
+            <div className="scale-90 sm:scale-100 origin-right">
+              {wallet.trailing}
+            </div>
+          )
         )}
       </div>
     </div>
@@ -153,15 +159,15 @@ export default function ConnectWallet() {
   return (
     <main className="min-h-screen flex items-center justify-center p-6 font-body selection:bg-primary/30">
 
-      <div className="relative w-full max-w-md glass-box rounded-[2.5rem] overflow-hidden animate-fade-in noise-bg glass-reflection border-shimmer">
+      <div className="relative w-full max-w-[calc(100vw-2.5rem)] sm:max-w-md glass-box rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden animate-fade-in noise-bg glass-reflection border-shimmer">
 
         {/* Subtle inner neon glow at top */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
         {/* Top bar */}
-        <header className="flex justify-between items-center px-8 pt-6 pb-2">
+        <header className="flex justify-between items-center px-6 sm:px-8 pt-6 pb-2">
           <div>
-            <h1 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">
+            <h1 className="font-headline text-2xl sm:text-3xl font-extrabold tracking-tight text-on-surface">
               Connect Wallet
             </h1>
             <p className="text-on-surface-variant text-sm mt-1">
@@ -177,7 +183,7 @@ export default function ConnectWallet() {
         </header>
 
         {/* Wallet list */}
-        <div className="px-8 py-3 space-y-2.5 max-h-[50vh] overflow-y-auto custom-scrollbar">
+        <div className="px-6 sm:px-8 py-3 space-y-2 sm:space-y-2.5 max-h-[45vh] sm:max-h-[50vh] overflow-y-auto custom-scrollbar">
           {wallets.map((wallet) => (
             <WalletCard
               key={wallet.id}
@@ -189,7 +195,7 @@ export default function ConnectWallet() {
         </div>
 
         {/* Footer */}
-        <footer className="px-8 pb-6 pt-2 space-y-4">
+        <footer className="px-6 sm:px-8 pb-6 pt-2 space-y-3 sm:space-y-4">
           {/* Terms + CTA box */}
           <div className="p-4 rounded-[1.75rem] glass-item relative overflow-hidden">
             {/* Inner neon line accent */}
@@ -217,7 +223,7 @@ export default function ConnectWallet() {
                 </p>
               </div>
               {/* Primary CTA — neon green gradient */}
-              <button className="w-full py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-xs tracking-[0.2em] uppercase shadow-[0px_8px_32px_rgba(57,255,106,0.25)] hover:shadow-[0px_12px_48px_rgba(57,255,106,0.45)] transition-all duration-300 bouncy-tap flex items-center justify-center gap-2">
+              <button className="w-full py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-container text-on-primary-fixed font-bold text-[10px] sm:text-xs tracking-[0.2em] uppercase shadow-[0px_8px_32px_rgba(57,255,106,0.25)] hover:shadow-[0px_12px_48px_rgba(57,255,106,0.45)] transition-all duration-300 bouncy-tap flex items-center justify-center gap-2">
                 Learn More
                 <span className="material-symbols-outlined text-lg">arrow_forward</span>
               </button>
