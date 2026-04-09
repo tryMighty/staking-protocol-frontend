@@ -109,7 +109,7 @@ function WalletCard({ wallet, onClick, isConnecting }: { wallet: Wallet; onClick
       {wallet.badge?.variant === 'recommended' && !isConnecting && (
         <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
-      <div className={`relative flex items-center justify-between p-5 glass-item rounded-2xl ${isConnecting ? 'animate-pulse border-primary/40' : ''}`}>
+      <div className={`relative flex items-center justify-between p-4 glass-item rounded-2xl ${isConnecting ? 'animate-pulse border-primary/40' : ''}`}>
         {/* Left: icon + name */}
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center border border-primary/10">
@@ -159,7 +159,7 @@ export default function ConnectWallet() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
         {/* Top bar */}
-        <header className="flex justify-between items-center px-8 pt-10 pb-4">
+        <header className="flex justify-between items-center px-8 pt-6 pb-2">
           <div>
             <h1 className="font-headline text-3xl font-extrabold tracking-tight text-on-surface">
               Connect Wallet
@@ -177,7 +177,7 @@ export default function ConnectWallet() {
         </header>
 
         {/* Wallet list */}
-        <div className="px-8 py-6 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+        <div className="px-8 py-3 space-y-2.5 max-h-[50vh] overflow-y-auto custom-scrollbar">
           {wallets.map((wallet) => (
             <WalletCard
               key={wallet.id}
@@ -189,12 +189,12 @@ export default function ConnectWallet() {
         </div>
 
         {/* Footer */}
-        <footer className="p-8 space-y-6">
+        <footer className="px-8 pb-6 pt-2 space-y-4">
           {/* Terms + CTA box */}
-          <div className="p-6 rounded-[2rem] glass-item relative overflow-hidden">
+          <div className="p-4 rounded-[1.75rem] glass-item relative overflow-hidden">
             {/* Inner neon line accent */}
-            <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-            <div className="relative flex flex-col gap-4">
+            <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+            <div className="relative flex flex-col gap-3">
               <div className="flex items-start gap-3">
                 <div className="w-6 h-6 shrink-0 rounded-full bg-secondary/15 flex items-center justify-center mt-0.5">
                   <span
