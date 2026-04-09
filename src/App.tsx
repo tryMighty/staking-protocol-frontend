@@ -8,14 +8,12 @@ import Dashboard from './pages/Dashboard'
 export default function App() {
   const [isAppReady, setIsAppReady] = useState(false)
   const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const [loadingProgress, setLoadingProgress] = useState(20) // Start at 20% for initial script execution
 
   useEffect(() => {
-    // Listen for the global window load event
     const handleLoad = () => {
-      // Small artificial delay to ensure the preloader animation finishes smoothly
-      setTimeout(() => {
-        setIsAppReady(true)
-      }, 500)
+      // Small artificial boost to 30% when window finishes loading
+      setLoadingProgress(prev => Math.max(prev, 30))
     }
 
     if (document.readyState === 'complete') {
@@ -26,13 +24,25 @@ export default function App() {
     }
   }, [])
 
+  const handleVideoProgress = (percent: number) => {
+    // Map 0-100% video progress to 30-100% of the loading bar
+    const total = 30 + (percent * 0.7)
+    setLoadingProgress(Math.floor(total))
+  }
+
   return (
     <>
       {/* High-end Celestial Preloader */}
-      <Preloader isReady={isVideoLoaded} />
+      <Preloader isReady={isVideoLoaded} forcedProgress={loadingProgress} />
 
       {/* Global video background — fixed, behind everything */}
-      <VideoBackground onLoaded={() => setIsVideoLoaded(true)} />
+      <VideoBackground 
+        onLoaded={() => {
+          setIsVideoLoaded(true)
+          setLoadingProgress(100)
+        }} 
+        onProgress={handleVideoProgress}
+      />
 
       {/* Main page content container */}
       <div 

@@ -1,11 +1,17 @@
 import { useState, useEffect } from 'react'
 
-export default function Preloader({ isReady }: { isReady: boolean }) {
+export default function Preloader({ isReady, forcedProgress }: { isReady: boolean, forcedProgress?: number }) {
   const [progress, setProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
-    // Artificial progress to simulate high-end initialization
+    // If a forced progress is provided (real network data), use it
+    if (forcedProgress !== undefined) {
+      setProgress(forcedProgress)
+      return
+    }
+
+    // Fallback artificial progress if no network tracking is active
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
@@ -25,7 +31,7 @@ export default function Preloader({ isReady }: { isReady: boolean }) {
     }
 
     return () => clearInterval(interval)
-  }, [progress, isReady])
+  }, [progress, isReady, forcedProgress])
 
   if (!isVisible) return null
 
