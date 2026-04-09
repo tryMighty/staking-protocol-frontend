@@ -172,13 +172,6 @@ export default function ConnectWallet() {
           <p className="text-on-surface-variant text-[10px] sm:text-sm mt-1 whitespace-nowrap">
             Select your celestial key to access the vault
           </p>
-          
-          <button
-            className="absolute top-6 right-6 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full glass-item text-on-surface-variant hover:text-primary transition-colors bouncy-tap"
-            aria-label="Close"
-          >
-            <span className="material-symbols-outlined text-lg sm:text-2xl">close</span>
-          </button>
         </header>
 
         {/* Wallet list */}
