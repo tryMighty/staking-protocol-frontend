@@ -39,6 +39,46 @@
   box-shadow: inset 0 1px 0 rgba(57, 255, 106, 0.1), 0 0 20px rgba(57, 255, 106, 0.06);
 }
 
+/* ─── Grain / Noise Texture ────────────────────────── */
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ─── Tech Grid & Scanner Animation ───────────────── */
+.tech-grid {
+  background-image: 
+    linear-gradient(rgba(57, 255, 106, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 106, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.scanner-line {
+  position: absolute;
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(57, 255, 106, 0.12),
+    transparent
+  );
+  animation: scan 6s linear infinite;
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+
 /* ─── Dashboard glassmorphism ───────────────────────── */
 .glass-panel {
   background: rgba(15, 30, 15, 0.15); /* Significantly lighter to show video */
@@ -72,6 +112,69 @@
 
 .glow-soft {
   box-shadow: 0 0 30px rgba(57, 255, 106, 0.06);
+}
+
+/* ─── Moving Light Reflection ──────────────────────── */
+.glass-reflection {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-reflection::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 250%;
+  height: 250%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 55%
+  );
+  pointer-events: none;
+  z-index: 30;
+  animation: sliding-glare 20s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+}
+
+@keyframes sliding-glare {
+  0% { transform: translate(-40%, -40%); opacity: 0; }
+  10% { opacity: 1; }
+  30% { transform: translate(40%, 40%); opacity: 0; }
+  100% { transform: translate(40%, 40%); opacity: 0; }
+}
+
+/* ─── Border Shimmer Effect ───────────────────────── */
+.border-shimmer {
+  position: relative;
+}
+
+.border-shimmer::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 80%,
+    rgba(57, 255, 106, 0.5) 90%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  border-radius: inherit;
+  animation: border-rotate 12s linear infinite;
+  pointer-events: none;
+  z-index: 25;
+}
+
+@keyframes border-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ─── Tap / bouncy interaction ──────────────────────── */
@@ -148,3 +251,36 @@ input[type='number'] {
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
 .delay-300 { animation-delay: 300ms; }
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ─── Readability Enhancements ──────────────────────── */
+.text-value {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-label {
+  color: #39ff6a;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+.text-subtitle {
+  color: rgba(201, 230, 208, 0.7);
+}

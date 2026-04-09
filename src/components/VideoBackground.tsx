@@ -16,6 +16,13 @@ export default function VideoBackground() {
         muted
         playsInline
       />
+      {/* Dark overlay to increase UI contrast */}
+      <div className="absolute inset-0 bg-black/50" />
+      
+      {/* Tech grid with pulse effect */}
+      <div className="absolute inset-0 tech-grid opacity-30">
+        <div className="scanner-line" />
+      </div>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 /* ── Wallet data ────────────────────────────────────── */
@@ -102,28 +102,36 @@ function Badge({ label, variant }: { label: string; variant: 'recommended' | 're
 }
 
 /* ── Wallet card ────────────────────────────────────── */
-function WalletCard({ wallet, onClick }: { wallet: Wallet; onClick: () => void }) {
+function WalletCard({ wallet, onClick, isConnecting }: { wallet: Wallet; onClick: () => void; isConnecting: boolean }) {
   return (
-    <div className="relative group cursor-pointer bouncy-tap" onClick={onClick}>
+    <div className={`relative group cursor-pointer bouncy-tap transition-all duration-300 ${isConnecting ? 'opacity-50 pointer-events-none scale-[0.98]' : ''}`} onClick={onClick}>
       {/* Neon glow — only for MetaMask (recommended) */}
-      {wallet.badge?.variant === 'recommended' && (
+      {wallet.badge?.variant === 'recommended' && !isConnecting && (
         <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-2xl blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}
-      <div className="relative flex items-center justify-between p-5 glass-item rounded-2xl">
+      <div className={`relative flex items-center justify-between p-5 glass-item rounded-2xl ${isConnecting ? 'animate-pulse border-primary/40' : ''}`}>
         {/* Left: icon + name */}
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center border border-primary/10">
-            {wallet.icon}
+            {isConnecting ? (
+              <span className="material-symbols-outlined animate-spin text-primary">sync</span>
+            ) : wallet.icon}
           </div>
           <div>
-            <span className="font-headline font-bold text-on-surface block">{wallet.name}</span>
-            <span className="text-xs text-on-surface-variant">{wallet.subtitle}</span>
+            <span className="font-headline font-bold text-on-surface block">
+              {isConnecting ? 'Connecting...' : wallet.name}
+            </span>
+            <span className="text-xs text-on-surface-variant font-medium">
+              {isConnecting ? 'Establishing celestial link' : wallet.subtitle}
+            </span>
           </div>
         </div>
         {/* Right */}
-        {wallet.badge ? (
-          <Badge label={wallet.badge.label} variant={wallet.badge.variant} />
-        ) : wallet.trailing}
+        {!isConnecting && (
+          wallet.badge ? (
+            <Badge label={wallet.badge.label} variant={wallet.badge.variant} />
+          ) : wallet.trailing
+        )}
       </div>
     </div>
   )
@@ -132,11 +140,20 @@ function WalletCard({ wallet, onClick }: { wallet: Wallet; onClick: () => void }
 /* ── Page ──────────────────────────────────────────── */
 export default function ConnectWallet() {
   const navigate = useNavigate()
+  const [connectingId, setConnectingId] = useState<string | null>(null)
+
+  const handleConnect = (id: string) => {
+    setConnectingId(id)
+    // Artificial delay to show high-end connecting state
+    setTimeout(() => {
+      navigate('/dashboard')
+    }, 1500)
+  }
 
   return (
     <main className="min-h-screen flex items-center justify-center p-6 font-body selection:bg-primary/30">
 
-      <div className="relative w-full max-w-md glass-box rounded-[2.5rem] overflow-hidden animate-fade-in">
+      <div className="relative w-full max-w-md glass-box rounded-[2.5rem] overflow-hidden animate-fade-in noise-bg glass-reflection border-shimmer">
 
         {/* Subtle inner neon glow at top */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
@@ -160,12 +177,13 @@ export default function ConnectWallet() {
         </header>
 
         {/* Wallet list */}
-        <div className="px-8 py-6 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+        <div className="px-8 py-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
           {wallets.map((wallet) => (
             <WalletCard
               key={wallet.id}
               wallet={wallet}
-              onClick={() => navigate('/dashboard-2')}
+              isConnecting={connectingId === wallet.id}
+              onClick={() => handleConnect(wallet.id)}
             />
           ))}
         </div>
