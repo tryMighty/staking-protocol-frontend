@@ -5,7 +5,7 @@
  *   - deep black at edges  (absorbs the dark corners of the video)
  *   - very dark forest green mid-tone  (preserves the green ambient glow)
  */
-export default function VideoBackground() {
+export default function VideoBackground({ onLoaded }: { onLoaded?: () => void }) {
   return (
     <div className="fixed inset-0 overflow-hidden" style={{ zIndex: -1 }}>
       <video
@@ -15,6 +15,7 @@ export default function VideoBackground() {
         loop
         muted
         playsInline
+        onCanPlayThrough={onLoaded}
       />
       {/* Dark overlay to increase UI contrast */}
       <div className="absolute inset-0 bg-black/50" />

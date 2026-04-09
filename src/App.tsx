@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 
 export default function App() {
   const [isAppReady, setIsAppReady] = useState(false)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
 
   useEffect(() => {
     // Listen for the global window load event
@@ -28,10 +29,10 @@ export default function App() {
   return (
     <>
       {/* High-end Celestial Preloader */}
-      <Preloader />
+      <Preloader isReady={isVideoLoaded} />
 
       {/* Global video background — fixed, behind everything */}
-      <VideoBackground />
+      <VideoBackground onLoaded={() => setIsVideoLoaded(true)} />
 
       {/* Main page content container */}
       <div 

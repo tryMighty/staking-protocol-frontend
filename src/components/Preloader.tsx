@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function Preloader() {
+export default function Preloader({ isReady }: { isReady: boolean }) {
   const [progress, setProgress] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
 
@@ -17,21 +17,21 @@ export default function Preloader() {
       })
     }, 150)
 
-    // Complete loader when progress reaches 100
-    if (progress === 100) {
+    // Complete loader ONLY when progress is 100 AND the video signal is received
+    if (progress === 100 && isReady) {
       setTimeout(() => {
         setIsVisible(false)
       }, 500)
     }
 
     return () => clearInterval(interval)
-  }, [progress])
+  }, [progress, isReady])
 
   if (!isVisible) return null
 
   return (
     <div 
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#070e08] transition-opacity duration-1000 ${progress === 100 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#070e08] transition-opacity duration-1000 ${(progress === 100 && isReady) ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
     >
       {/* Background elements to match theme */}
       <div className="absolute inset-0 tech-grid opacity-20">
@@ -65,7 +65,8 @@ export default function Preloader() {
               {progress < 30 && "Decrypting visual matrix..."}
               {progress >= 30 && progress < 60 && "Establishing uplink..."}
               {progress >= 60 && progress < 90 && "Calibrating terminal aesthetics..."}
-              {progress >= 90 && "Ready for deployment."}
+              {progress >= 90 && !isReady && "Optimizing bandwidth for video stream..."}
+              {progress >= 90 && isReady && "System ready. Transmitting..."}
             </span>
           </div>
           <span className="font-mono text-[8px] sm:text-[10px] text-white/40">{progress}% COMPLETE</span>
