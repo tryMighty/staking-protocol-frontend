@@ -204,7 +204,7 @@ function InventoryPanel() {
 
 function MobileNav() {
   return (
-    <nav className="fixed bottom-6 left-6 right-6 z-50 md:hidden flex items-center justify-between p-2 glass-item rounded-2xl shadow-2xl backdrop-blur-xl border border-primary/20">
+    <nav className="w-full max-w-7xl md:hidden flex items-center justify-between p-2 glass-item rounded-2xl shadow-xl backdrop-blur-xl border border-primary/10 mt-2">
       <button className="flex-1 flex flex-col items-center gap-1 py-2 text-primary bg-primary/10 rounded-xl transition-all">
         <span className="material-symbols-outlined text-xl">account_balance</span>
         <span className="text-[9px] font-black uppercase tracking-widest">Stake</span>
@@ -224,14 +224,14 @@ function MobileNav() {
 
 export default function Dashboard() {
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 font-body text-on-surface selection:bg-primary/30">
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen p-4 md:p-6 font-body text-on-surface selection:bg-primary/30">
       
       {/* Visual Accents — Shared subtle neon green overlays */}
       <div className="fixed bottom-0 left-0 w-[500px] h-[500px] bg-primary/[0.03] blur-[150px] rounded-full pointer-events-none -translate-x-1/2 translate-y-1/2 z-0"></div>
       <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-primary/[0.03] blur-[180px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3 z-0"></div>
       
       {/* Orchestrated Application Container */}
-      <main className="w-full max-w-7xl h-full md:h-[calc(100vh-5rem)] md:max-h-[880px] md:min-h-[650px] flex flex-col md:flex-row gap-4 glass-box rounded-[2rem] md:rounded-[2.5rem] p-0 md:p-4 shadow-2xl relative z-10 transition-all noise-bg glass-reflection border-shimmer overflow-hidden mb-20 md:mb-0">
+      <main className="w-full max-w-7xl h-[calc(100vh-10rem)] md:h-[calc(100vh-5rem)] md:max-h-[880px] md:min-h-[650px] flex flex-col md:flex-row gap-4 glass-box rounded-[2rem] md:rounded-[2.5rem] p-4 shadow-2xl relative z-10 transition-all noise-bg glass-reflection border-shimmer overflow-hidden">
         
         {/* Subtle inner neon glow at top */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
@@ -242,7 +242,7 @@ export default function Dashboard() {
           <HeaderBar />
 
           {/* Grid applying tailwind-patterns container query responsiveness */}
-          <div className="grid grid-cols-12 gap-4 flex-1 h-full overflow-y-auto custom-scrollbar pb-32 md:pb-2 md:pr-2">
+          <div className="grid grid-cols-12 gap-4 flex-1 overflow-y-auto custom-scrollbar md:pb-2 md:pr-2 pr-1">
             
             <div className="col-span-full md:col-span-7 xl:col-span-8 flex animate-fade-in-up delay-100">
               <MetricCard 
@@ -285,7 +285,6 @@ export default function Dashboard() {
         </section>
       </main>
 
-      {/* Floating Action Menu for Mobile */}
       <MobileNav />
     </div>
   )
