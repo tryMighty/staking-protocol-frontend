@@ -90,17 +90,13 @@ function HeaderBar() {
   return (
     <header className="flex justify-between items-center w-full px-5 md:px-8 py-4 md:py-5 glass-item rounded-2xl mb-4">
       <div className="flex items-center gap-3">
-        {/* Mobile-only Branding */}
-        <div className="flex md:hidden flex-col">
-          <h1 className="font-headline text-xs font-black text-primary tracking-[0.2em] uppercase">Celestial</h1>
-        </div>
-        <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_12px_rgba(57,255,106,0.8)]"></div>
-        <span className="font-headline text-sm md:text-base font-bold tracking-tight text-on-surface">Luminous Ledger</span>
+        <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_12px_rgba(57,255,106,0.8)]"></div>
+        <span className="font-headline text-xs md:text-base font-bold tracking-tight text-on-surface">Luminous Ledger</span>
       </div>
       <div className="flex items-center">
-        <Link to="/" className="glass-item px-3 md:px-5 py-2 md:py-2.5 rounded-full flex items-center gap-2 md:gap-3 group hover:border-primary/25 transition-colors bouncy-tap">
-          <span className="material-symbols-outlined text-on-surface-variant text-sm md:text-base group-hover:text-primary transition-colors">account_balance_wallet</span>
-          <span className="font-mono text-[9px] md:text-[11px] text-on-surface-variant tracking-widest font-medium group-hover:text-on-surface transition-colors">0x71C...4e2</span>
+        <Link to="/" className="glass-item px-2.5 md:px-5 py-1.5 md:py-2.5 rounded-full flex items-center gap-2 md:gap-3 group hover:border-primary/25 transition-colors bouncy-tap">
+          <span className="material-symbols-outlined text-on-surface-variant text-xs md:text-base group-hover:text-primary transition-colors">account_balance_wallet</span>
+          <span className="font-mono text-[8px] md:text-[11px] text-on-surface-variant tracking-widest font-medium group-hover:text-on-surface transition-colors">0x7...4e2</span>
         </Link>
       </div>
     </header>
@@ -246,7 +242,7 @@ export default function Dashboard() {
           <HeaderBar />
 
           {/* Grid applying tailwind-patterns container query responsiveness */}
-          <div className="grid grid-cols-12 gap-4 flex-1 h-full overflow-y-auto custom-scrollbar pb-24 md:pb-2 md:pr-2">
+          <div className="grid grid-cols-12 gap-4 flex-1 h-full overflow-y-auto custom-scrollbar pb-32 md:pb-2 md:pr-2">
             
             <div className="col-span-full md:col-span-7 xl:col-span-8 flex animate-fade-in-up delay-100">
               <MetricCard 
