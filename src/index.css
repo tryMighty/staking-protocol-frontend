@@ -11,6 +11,43 @@
   user-select: none;
 }
 
+/* ─── Browser Theme & Scrollbar ─────────────────────── */
+:root {
+  color-scheme: dark;
+  accent-color: #39ff6a;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(57, 255, 106, 0.15);
+  border: 1px solid rgba(57, 255, 106, 0.2);
+  border-radius: 10px;
+  transition: background 0.25s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(57, 255, 106, 0.3);
+  border-color: rgba(57, 255, 106, 0.5);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* ─── Connect-Wallet glassmorphism ──────────────────── */
 /* Tinted with neon green (#39ff6a) to match the video palette        */
 .glass-box {
