@@ -118,10 +118,10 @@ function WalletCard({ wallet, onClick, isConnecting }: { wallet: Wallet; onClick
             ) : wallet.icon}
           </div>
           <div>
-            <span className="font-headline font-bold text-on-surface block">
+            <span className="font-headline font-bold text-on-surface block whitespace-nowrap text-sm sm:text-base">
               {isConnecting ? 'Connecting...' : wallet.name}
             </span>
-            <span className="text-xs text-on-surface-variant font-medium">
+            <span className="text-[10px] sm:text-xs text-on-surface-variant font-medium block whitespace-nowrap">
               {isConnecting ? 'Establishing celestial link' : wallet.subtitle}
             </span>
           </div>
@@ -165,20 +165,19 @@ export default function ConnectWallet() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
         {/* Top bar */}
-        <header className="flex justify-between items-center px-6 sm:px-8 pt-6 pb-2">
-          <div>
-            <h1 className="font-headline text-2xl sm:text-3xl font-extrabold tracking-tight text-on-surface">
-              Connect Wallet
-            </h1>
-            <p className="text-on-surface-variant text-sm mt-1">
-              Select your celestial key to access the vault
-            </p>
-          </div>
+        <header className="relative flex flex-col items-center px-6 sm:px-8 pt-6 pb-2 text-center">
+          <h1 className="font-headline text-xl sm:text-3xl font-extrabold tracking-tight text-on-surface whitespace-nowrap">
+            Connect Wallet
+          </h1>
+          <p className="text-on-surface-variant text-[10px] sm:text-sm mt-1 whitespace-nowrap">
+            Select your celestial key to access the vault
+          </p>
+          
           <button
-            className="w-10 h-10 flex items-center justify-center rounded-full glass-item text-on-surface-variant hover:text-primary transition-colors bouncy-tap"
+            className="absolute top-6 right-6 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full glass-item text-on-surface-variant hover:text-primary transition-colors bouncy-tap"
             aria-label="Close"
           >
-            <span className="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined text-lg sm:text-2xl">close</span>
           </button>
         </header>
 
