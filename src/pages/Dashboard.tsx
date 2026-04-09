@@ -71,7 +71,7 @@ function SidebarItem({ icon, label, isActive }: { icon: string; label: string; i
 
 function Sidebar() {
   return (
-    <aside className="hidden md:flex w-[280px] h-full flex-col p-6 space-y-2 glass-item rounded-[1.75rem] relative overflow-hidden noise-bg">
+    <aside className="w-[280px] h-full flex flex-col p-6 space-y-2 glass-item rounded-[1.75rem] relative overflow-hidden noise-bg">
       <div className="px-2 py-6 mb-8 text-left">
         <h1 className="font-headline text-xl font-black text-on-surface tracking-[0.2em] uppercase">Celestial</h1>
         <p className="text-on-surface-variant text-[10px] mt-1.5 tracking-widest font-semibold uppercase">Private Banking Terminal</p>
@@ -81,26 +81,8 @@ function Sidebar() {
         <SidebarItem icon="logout" label="Unstake" />
         <SidebarItem icon="payments" label="Claim" />
       </nav>
+      {/* Settings removed per request */}
     </aside>
-  )
-}
-
-function MobileNav() {
-  return (
-    <nav className="md:hidden fixed bottom-6 left-6 right-6 z-50 glass-item rounded-2xl p-2 flex justify-around items-center noise-bg border-shimmer">
-      <button className="flex flex-col items-center p-2 text-primary">
-        <span className="material-symbols-outlined text-2xl">account_balance</span>
-        <span className="text-[10px] font-bold uppercase tracking-tighter mt-1">Stake</span>
-      </button>
-      <button className="flex flex-col items-center p-2 text-on-surface-variant">
-        <span className="material-symbols-outlined text-2xl">logout</span>
-        <span className="text-[10px] font-bold uppercase tracking-tighter mt-1">Unstake</span>
-      </button>
-      <button className="flex flex-col items-center p-2 text-on-surface-variant">
-        <span className="material-symbols-outlined text-2xl">payments</span>
-        <span className="text-[10px] font-bold uppercase tracking-tighter mt-1">Claim</span>
-      </button>
-    </nav>
   )
 }
 
@@ -136,24 +118,24 @@ function MetricCard({
   subLabel?: React.ReactNode; 
 }) {
   return (
-    <div className="w-full glass-item rounded-[2.5rem] p-6 sm:p-8 lg:p-10 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden noise-bg glass-reflection border-shimmer">
+    <div className="w-full glass-item rounded-[2.5rem] p-10 flex flex-col justify-between group transition-all duration-500 relative overflow-hidden noise-bg glass-reflection border-shimmer">
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/[0.04] to-transparent pointer-events-none"></div>
       <div className="flex justify-between items-start relative z-10 w-full">
         <div>
           <p className="text-label mb-2">{titleLabel}</p>
-          <h2 className="text-xl lg:text-3xl font-headline font-extrabold text-white tracking-tight leading-tight">{title}</h2>
+          <h2 className="text-xl lg:text-2xl xl:text-3xl font-headline font-extrabold text-white tracking-tight">{title}</h2>
         </div>
         {iconElement && (
-          <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 shrink-0 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:bg-primary/20 transition-colors">
+          <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:bg-primary/20 transition-colors">
             {iconElement}
           </div>
         )}
       </div>
-      <div className="relative z-10 mt-4 sm:mt-6 text-value">
-        <div className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-headline font-black tracking-tighter">
+      <div className="relative z-10 mt-6 text-value">
+        <div className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter">
           {typeof value === 'string' ? <TickingNumber value={value} /> : value}
         </div>
-        <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-3">
+        <div className="mt-6 flex flex-wrap items-center gap-3">
           {subLabel}
         </div>
       </div>
@@ -164,7 +146,7 @@ function MetricCard({
 // User Action Component
 function ActionPanel() {
   return (
-    <div className="w-full glass-item rounded-[2.5rem] p-6 sm:p-8 lg:p-10 flex flex-col justify-between group transition-all duration-500 noise-bg glass-reflection border-shimmer">
+    <div className="w-full glass-item rounded-[2.5rem] p-10 flex flex-col justify-between group transition-all duration-500 noise-bg glass-reflection border-shimmer">
       <div>
         <p className="text-label mb-2">Your Position</p>
         <h2 className="text-xl font-headline font-bold text-white tracking-tight">Current Staked</h2>
@@ -191,7 +173,7 @@ function ActionPanel() {
 // Inventory Component
 function InventoryPanel() {
   return (
-    <div className="w-full glass-item rounded-[2.5rem] p-6 sm:p-8 lg:p-10 flex flex-col justify-between group transition-all duration-500 noise-bg glass-reflection border-shimmer">
+    <div className="w-full glass-item rounded-[2.5rem] p-10 flex flex-col justify-between group transition-all duration-500 noise-bg glass-reflection border-shimmer">
       <div>
         <p className="text-label mb-2">Wallet Inventory</p>
         <h2 className="text-xl font-headline font-bold text-white tracking-tight">Available Balance</h2>
@@ -230,13 +212,12 @@ export default function Dashboard() {
       <div className="fixed top-0 right-0 w-[600px] h-[600px] bg-primary/[0.03] blur-[180px] rounded-full pointer-events-none translate-x-1/3 -translate-y-1/3 z-0"></div>
       
       {/* Orchestrated Application Container */}
-      <main className="w-full max-w-7xl h-auto lg:h-[calc(100vh-5rem)] lg:max-h-[880px] flex flex-col md:flex-row gap-4 glass-box rounded-[2.5rem] p-3 md:p-4 shadow-2xl relative z-10 transition-all noise-bg glass-reflection border-shimmer mb-24 md:mb-0">
+      <main className="w-full max-w-7xl h-[calc(100vh-5rem)] max-h-[880px] min-h-[650px] flex flex-col md:flex-row gap-4 glass-box rounded-[2.5rem] p-4 shadow-2xl relative z-10 transition-all noise-bg glass-reflection border-shimmer">
         
         {/* Subtle inner neon glow at top */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent pointer-events-none" />
 
         <Sidebar />
-        <MobileNav />
 
         <section className="flex-1 flex flex-col h-full overflow-hidden">
           <HeaderBar />

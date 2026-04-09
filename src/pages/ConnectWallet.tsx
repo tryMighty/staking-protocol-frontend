@@ -177,7 +177,7 @@ export default function ConnectWallet() {
         </header>
 
         {/* Wallet list */}
-        <div className="px-8 py-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+        <div className="px-8 py-6 space-y-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
           {wallets.map((wallet) => (
             <WalletCard
               key={wallet.id}
