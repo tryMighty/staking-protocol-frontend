@@ -20,7 +20,18 @@ export default function App() {
       handleLoad()
     } else {
       window.addEventListener('load', handleLoad)
-      return () => window.removeEventListener('load', handleLoad)
+      
+      // Safety timeout: If the video takes too long (e.g., 5s), force resolve loading
+      const safetyTimeout = setTimeout(() => {
+        setIsVideoLoaded(true)
+        setLoadingProgress(100)
+        setIsAppReady(true)
+      }, 5000)
+
+      return () => {
+        window.removeEventListener('load', handleLoad)
+        clearTimeout(safetyTimeout)
+      }
     }
   }, [])
 
@@ -40,6 +51,7 @@ export default function App() {
         onLoaded={() => {
           setIsVideoLoaded(true)
           setLoadingProgress(100)
+          setIsAppReady(true)
         }} 
         onProgress={handleVideoProgress}
       />
